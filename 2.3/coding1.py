@@ -11,3 +11,13 @@ How old are you?
 > 25
 In 2056, you will be 56 years old!
 """
+
+
+#Age bot
+print("Hi, how old are you?")
+
+NowAge = int(input())
+
+OldAge = NowAge + 31
+
+print("You will be " + str(OldAge) + " in 31 years.")
