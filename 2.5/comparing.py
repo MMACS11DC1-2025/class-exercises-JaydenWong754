@@ -6,13 +6,12 @@ You must use user input to add interactivity to the program.
 You must design your algorithm in English first, then translate it to Python code.
 Test as you go! Describe in your comments what steps you took to test your code.
 """
-
 userline = ""
 userline2 = ""
 
 file = open("2.4/responses.csv")
 
-all_lines = file.readlines()
+all_lines = file.read()
 
 print("Hello, Whats your Name!")
 
@@ -38,9 +37,7 @@ userline = userline.split(",")
 
 userline2 = userline2.split(",")
 
-#userline = list(userline)
-
-#userline2 = list(userline2)
+userline = list(userline)
 
 result = [item for item in userline if item in userline2]
 
@@ -58,4 +55,19 @@ if reply3 == "yes" or "yeah":
     print("ok!")
 
 else:
-    print("umm rude")
+    print("umm k")
+
+data = all_lines.split("/n")
+
+for x in data:
+    items = x.split(",")
+
+result2 = [items for item in userline if item in x]
+
+total2 = len(result2)
+
+if total2 > 0.5:
+    print("ur similar with" + str(total2))
+    
+else:
+    print("error")
