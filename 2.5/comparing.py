@@ -6,68 +6,111 @@ You must use user input to add interactivity to the program.
 You must design your algorithm in English first, then translate it to Python code.
 Test as you go! Describe in your comments what steps you took to test your code.
 """
+#Jayden Wong
+#10/1/25
+#Similarity Bot
+#Gets 2 users input and turns them into lists
+#look at the similarities between items in the lists
+#then turns it into a percent and shows it to the user
+#ask if they wanna see difference\
+#then show it 
+
+#define variables
 userline = ""
 userline2 = ""
 
+#open file
 file = open("2.4/responses.csv")
 
-all_lines = file.read()
+#reads all lines in file
+#TEST ERROR: i accidentally made readlines read and i had a semantic error
+all_lines = file.readlines()
 
+#user inputs and display
 print("Hello, Whats your Name!")
 
 reply = input().lower().strip()
 
+#finds input
 for line in all_lines:
     if reply in line.lower():
         print("Heres your info.")
         print(line)
         userline = line
 
+#user input and display
 print("Who would you like to compare yourself to?")
 
 reply2 = input().lower().strip()
 
+#finds input of other person
 for line2 in all_lines:
     if reply2 in line2.lower():
         print("Heres their info.")
         print(line2)
         userline2 = line2
 
+if userline == "" or userline2 == "":
+    print("Sorry one of ur names cannot be found")
+    exit()
+
+#splits the list with commas
 userline = userline.split(",")
 
 userline2 = userline2.split(",")
 
-userline = list(userline)
+#TEST ERROR: i didnt know if i should use list(userline) etc but it ran without so idk
 
+#finds similarities
 result = [item for item in userline if item in userline2]
 
+#how much items in list
 total = len(result)
 
-percent = total / len(userline) * 100 
+#TEST ERROR: I need to x 100 because it returns a decimal
+#finds percent alike results
+#handle error
+if len(userline) == 0:
+    percent = 0
+else:
+    percent = total / len(userline) * 100
 
+#TEST ERROR: forgot to turn it to string woops
+#user display
 print("You have " + str(result) + " in common and are " + str(percent) + " percent alike")
 
-print("Do you wanna see who your most likely to be friends with")
+#looks at the data and sees the result to give a comment
+if percent >= 75:
+    print("Wow yall twins fr")
+
+elif percent >= 50:
+    print("could be best friends!")
+
+elif percent >= 25:
+    print("umm maybe a friend")
+
+else: # percent < 25
+    print("nah bro")
+
+#user input and display
+print("do u wanna know ur differences (reply with yes or yeah)")
 
 reply3 = input().lower().strip()
 
-if reply3 == "yes" or "yeah":
-    print("ok!")
+#if they wanna see it
+if reply3 == "yes" or  reply3 == "yeah":
 
-else:
-    print("umm k")
+    print("OK :)")
 
-data = all_lines.split("/n")
-
-for x in data:
-    items = x.split(",")
-
-result2 = [items for item in userline if item in x]
-
-total2 = len(result2)
-
-if total2 > 0.5:
-    print("ur similar with" + str(total2))
+    #looks for items not seen in eachothers list
+    result2 = [item for item in userline if item not in userline2]
+    result3 = [item for item in userline2 if item not in userline]
+    
+    #user display
+    print("you put:" + str(result2) + "while they put: " + str(result3))
     
 else:
-    print("error")
+    #user input and display
+    print("k not nice")
+    
+
