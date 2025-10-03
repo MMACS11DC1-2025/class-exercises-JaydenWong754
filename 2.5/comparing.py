@@ -27,7 +27,7 @@ file = open("2.4/responses.csv")
 all_lines = file.readlines()
 
 #user inputs and display
-print("Hello, Whats your Name!")
+print("Hello, Whats your first name!")
 
 reply = input().lower().strip()
 
@@ -44,12 +44,14 @@ print("Who would you like to compare yourself to?")
 reply2 = input().lower().strip()
 
 #finds input of other person
+#TEST GOOD:Finally worked, before it printed userline variable twice?
 for line2 in all_lines:
     if reply2 in line2.lower():
         print("Heres their info.")
         print(line2)
         userline2 = line2
 
+#see if that code is valid 
 if userline == "" or userline2 == "":
     print("Sorry one of ur names cannot be found")
     exit()
@@ -59,10 +61,11 @@ userline = userline.split(",")
 
 userline2 = userline2.split(",")
 
-#TEST ERROR: i didnt know if i should use list(userline) etc but it ran without so idk
+#TEST ERROR: i didnt know if i should use list(userline) etc but it ran without and i checked the variable type and it was list
 
+#TEST ERROR: i didnt have [2:] so it kept doing weird stuff with favorite numbers and id
 #finds similarities
-result = [item for item in userline if item in userline2]
+result = [item for item in userline[2:] if item in userline2[2:]]
 
 #how much items in list
 total = len(result)
@@ -76,21 +79,22 @@ else:
     percent = total / len(userline) * 100
 
 #TEST ERROR: forgot to turn it to string woops
+#TEST GOOD: Finally worked after fixing my code
 #user display
 print("You have " + str(result) + " in common and are " + str(percent) + " percent alike")
 
 #looks at the data and sees the result to give a comment
-if percent >= 75:
+if percent >= 50:
     print("Wow yall twins fr")
 
-elif percent >= 50:
+elif percent >= 40:
     print("could be best friends!")
 
-elif percent >= 25:
+elif percent >= 30:
     print("umm maybe a friend")
 
-else: # percent < 25
-    print("nah bro")
+else:
+    print("nah bro stay away")
 
 #user input and display
 print("do u wanna know ur differences (reply with yes or yeah)")
@@ -103,14 +107,12 @@ if reply3 == "yes" or  reply3 == "yeah":
     print("OK :)")
 
     #looks for items not seen in eachothers list
-    result2 = [item for item in userline if item not in userline2]
-    result3 = [item for item in userline2 if item not in userline]
+    result2 = [item for item in userline[2:] if item not in userline2[2:]]
+    result3 = [item for item in userline2[2:] if item not in userline[2:]]
     
     #user display
-    print("you put:" + str(result2) + "while they put: " + str(result3))
+    print("you input:" + str(result2) + "while they input: " + str(result3))
     
 else:
     #user input and display
     print("k not nice")
-    
-
