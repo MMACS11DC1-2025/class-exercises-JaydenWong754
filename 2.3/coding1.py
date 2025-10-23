@@ -14,10 +14,25 @@ In 2056, you will be 56 years old!
 
 
 #Age bot
-print("Hi, how old are you?")
+#print("Hi, how old are you?")
 
-NowAge = int(input())
+#NowAge = int(input())
 
-OldAge = NowAge + 31
+#OldAge = NowAge + 31
 
-print("You will be " + str(OldAge) + " in 31 years.")
+#print("You will be " + str(OldAge) + " in 31 years.")
+
+# Exercise 0: Factorial
+# Remember that n! is defined as n * (n-1)! and 0! is 1
+print("give a number")
+
+n = int(input().strip())
+
+def factorial(n):
+        if n == 1:
+            return 1
+        return n * factorial(n-1)
+
+factorial(n)
+
+print(factorial(n))

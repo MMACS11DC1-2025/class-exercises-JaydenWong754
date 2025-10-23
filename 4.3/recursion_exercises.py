@@ -5,9 +5,20 @@ Write recursive functions for each of the following problems:
 
 # Exercise 0: Factorial
 # Remember that n! is defined as n * (n-1)! and 0! is 1
+print("give a number")
+
+n = int(input().strip())
+
 def factorial(n):
-    # TODO implement this
-    return 1
+        if n == 1:
+            return 1
+        return n * factorial(n-1)
+
+factorial(n)
+
+print(factorial(n))
+
+
 
 print(factorial(1)) # Expected output: 1
 print(factorial(2)) # Expected output: 2
@@ -21,8 +32,21 @@ print(factorial(5)) # Expected output: 120
 
 def power(x, y):
     # TODO implement this
-    return 1
+    if y == 0:
+         return 1
+    return x * x**(y-1)
 
+print("give a number")
+
+x = int(input().strip())
+
+print("give a exponent")
+
+y = int(input().strip())
+
+
+
+print(power(x, y))
 # Test cases
 print(power(2, 3))  # Expected output: 8
 print(power(5, 0))  # Expected output: 1
@@ -34,8 +58,9 @@ print(power(3, 2))  # Expected output: 9
 # Remember that the sum of a list is the first item plus the sum of the rest of the list.
 
 def sum_list_recursive_helper(numbers, index):
-    # TODO: implement this
-    return 0
+    for o in range(sum_list):
+        sum_list[0] + sum_list[o]
+    return o + 1
 
 def sum_list(numbers):
     if len(numbers) > 0:
@@ -53,11 +78,12 @@ print(sum_list([5, 10, 15]))    # Expected output: 30
 # Remember that the count of vowels in a string is the number of vowels (0 or 1) in the first character
 # plus the number of vowels in the rest of the string.
 # NOTE: you will also need to implement a recursive helper, like in exercise 2.
-
+counter = 0
 vowels = "aeiou"
 def count_vowels_recursive_helper(word, index):
-    # TODO implement this
-    return 0
+    for i in range(len(word)):
+        if word[i] in vowels.split():
+            counter += 1
 
 def count_vowels(word):
     # TODO implement this
