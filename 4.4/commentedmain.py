@@ -18,7 +18,7 @@ for x in max_steps:
         print("invalid input, enter a number")
         exit()
      
-max_steps = int(input()) #TEST ERROR : I forgot to turn the input into an integer
+max_steps = int(max_steps) #TEST ERROR : I forgot to turn the input into an integer
 
 #input validation if too big or small
 if max_steps > 45:
