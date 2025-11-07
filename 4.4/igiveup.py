@@ -46,12 +46,13 @@ while booktitle == True:
 name = []
 vowel = []
 print("give a name")
-name = input().split()
-newname = name
+name = input()
+newname = name.split()
 for x in name:
     if x in "aeiou":
         vowel += x
-        for
+        for vowel in newname:
+            newname[vowel] == vowel[-1 - i]
         
 
 "for i in range(len(vowel)):"
