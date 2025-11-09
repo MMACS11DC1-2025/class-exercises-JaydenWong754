@@ -4,16 +4,19 @@ This resulted in an intricate pattern that looked kind of like a star with a spi
 
 The programs works by first asking the user for the size of the portal through inputs, and validtaes it if its a number, then if its the right size. I had trouble with validating as i thought break and exit could be used interchangeably
 It then asks the user for colors one at a time and sees if its in teh dictionary of colors. This is where I had an error from indenting and spacing so it took me quite a while to fix it
+For sizing, i chose 50-500 because past 500 the spiral would start to go out of frame, and 50 was like a star spiral so i thought that looked cool
 
-For the recursive functionm itself, it uses 3 things, current_step to track current iteration, max_steps which is the base case, and counter to count the amount of recursive is called based on the max_steps. Because i accidebtally set the counter to 1 instead of 0 at the beginning, it always printed one extra, so I fixed it to counter = 0
-it then says that if the current step reaches max_steps, the base case, it returns counter to see how much it looped
+For the recursive function itself, it uses 3 things, current_step to track current iteration, max_steps which is the base case, and total_calls to count the amount of recursive is called based on the max_steps. Because i accidebtally set the counter to 1 instead of 0 at the beginning, it always printed one extra, so I fixed it to counter = 0
+it then says that if the current step reaches max_steps, the base case, it returns total_calls to see how much it looped
+I also created a second base case checking the physical size of it with length, so the program wil stop if the drawing goes too big, stopping the recursion
 I set a base length, which is 30 , and made length base length and current step by 10 to make the lines longer each time. I just played around with random numbers but settled on these settings
 
 next part is my actual function, which draw forward by length pixels using a color. and turn right by 190 degrees.
 This part was the easiest for me. It draws a 3 sided pattern each time.  
 
 lastly, recursive call.
-It calls the recursive_spiral function again, increments current_step by 1 to move to the next iteration and increase the line length and increments counter by 1 to keep track of the total number of calls.
+It calls the recursive_spiral function again, increments current_step by 1 to move to the next iteration and increase the line length and increments 
+total_calls by 1 to keep track of the total number of calls.
 
 I also preset the turtle to a position before running.
 
@@ -28,3 +31,53 @@ Ashar also helped me with the counting, which helped me alot.
 Inputs can be affect through validation, which exits the program if it is not valid.
 
 if inputs are valid, programs differ by size of portal and the combination of 3 colors.
+
+TEST CASES
+1. User Enters Invalid Size(nothing drawn)
+-expected to exit the program using if statement and exit()
+
+Make a portal to another dimension! How big is it?
+ 1000000000000
+Woah, you're going to destroy the universe! Enter a smaller number.
+
+2. User enters invalid colors(nothing drawn)
+-expected to exit the program using if statement and exit()
+
+Make a portal to another dimension! How big is it?
+ 70
+Give a color from the rainbow
+ red
+Give another color:
+ orange
+Give one last color:
+ bright sunshinie yellow
+Sorry, at least one of your colors is invalid.
+
+3. user enters all valid data - example3.png 
+Make a portal to another dimension! How big is it?
+ 250
+Give a color from the rainbow
+ red
+Give another color:
+ green
+Give one last color:
+ blue
+Total recursion calls: 250
+
+4. user enters all valid data - example4.png
+Make a portal to another dimension! How big is it?
+ 50
+Give a color from the rainbow
+ orange
+Give another color:
+ purple
+Give one last color:
+ yellow
+Total recursion calls: 50
+
+5. user enters a string instead of an integer (no drawing)
+-expected to exit the program using if statement and exit()
+
+Make a portal to another dimension! How big is it?
+ two hundred
+invalid input, enter a number
