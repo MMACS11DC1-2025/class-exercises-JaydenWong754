@@ -1,0 +1,30 @@
+While experimenting with fractals and recursion, I originnally wanted to make a carpet like design with squares and stamps.
+After many faild attemps, i played around with my turn angles, chnaging the turtle to turn right at 190 degrees instead of 90 degrees.
+This resulted in an intricate pattern that looked kind of like a star with a spiral inside. I desided to make it a "portal maker bot" because it reminded me of a galaxy. 
+
+The programs works by first asking the user for the size of the portal through inputs, and validtaes it if its a number, then if its the right size. I had trouble with validating as i thought break and exit could be used interchangeably
+It then asks the user for colors one at a time and sees if its in teh dictionary of colors. This is where I had an error from indenting and spacing so it took me quite a while to fix it
+
+For the recursive functionm itself, it uses 3 things, current_step to track current iteration, max_steps which is the base case, and counter to count the amount of recursive is called based on the max_steps. Because i accidebtally set the counter to 1 instead of 0 at the beginning, it always printed one extra, so I fixed it to counter = 0
+it then says that if the current step reaches max_steps, the base case, it returns counter to see how much it looped
+I set a base length, which is 30 , and made length base length and current step by 10 to make the lines longer each time. I just played around with random numbers but settled on these settings
+
+next part is my actual function, which draw forward by length pixels using a color. and turn right by 190 degrees.
+This part was the easiest for me. It draws a 3 sided pattern each time.  
+
+lastly, recursive call.
+It calls the recursive_spiral function again, increments current_step by 1 to move to the next iteration and increase the line length and increments counter by 1 to keep track of the total number of calls.
+
+I also preset the turtle to a position before running.
+
+after running, it outputs the number of recursive calls made.
+
+overall, my biggest hardships were at the beginning while I was trying to make a carpet design, and for some reason drawing two portals instead of one when I did the counting another way. 
+
+Ashar and Serene looked over my work. Ashar liked the user interface but gave me feedback to validate the users input, which i did. Serene was impressed by the intricate designs, but told me to focus on the readme,md as I did not have it done before.
+
+Ashar also helped me with the counting, which helped me alot.
+
+Inputs can be affect through validation, which exits the program if it is not valid.
+
+if inputs are valid, programs differ by size of portal and the combination of 3 colors.

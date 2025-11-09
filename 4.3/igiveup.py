@@ -42,24 +42,20 @@ while booktitle == True:
                     finalcount += 1
     print("theres " + str(finalcount) + " book with under " + str(maxwords) + " words")
 '''
-
+'''
 name = []
 vowel = []
 print("give a name")
-name = input()
-newname = name.split()
+name = input().split()
 for x in name:
-    if x in "aeiou":
-        vowel += x
-        for vowel in newname:
-            newname[vowel] == vowel[-1 - i]
-        
-
-"for i in range(len(vowel)):"
-    "if x in "":"
-        "x = vowel[-1 - i]"
-
-
+    for y in x:
+        if y in "aeiou":
+            vowel += y
+            for i in range(len(x)):
+                if y in "aeiou":
+                    y = vowel[-1 - i]
+                    print(name)
+'''
 '''
 import random
 words = random.choice(["lose", "cats", "fart"])
@@ -76,3 +72,4 @@ while x == True:
         print("u got it! it was " + words)
         x = False
 '''
+print

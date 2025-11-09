@@ -8,7 +8,7 @@ t = turtle.Turtle()
 t.speed('fastest')
 
 #user input for size
-print("Make a star! How big is it?")
+print("Make a portal to another dimension! How big is it?")
 
 max_steps = input()
 
@@ -22,11 +22,11 @@ max_steps = int(max_steps) #TEST ERROR : I forgot to turn the input into an inte
 
 #input validation if too big or small
 if max_steps > 45:
-    print("Woah, you're going to destroy the Milky Way! Enter a smaller number.")
+    print("Woah, you're going to destroy the universe! Enter a smaller number.")
     exit() #TEST ERROR : I originally had break(), which didnt work as it can only be used in for and while loops
 
 if max_steps < 15:
-    print("Aww man, your star merged into a black hole. Try again.")
+    print("Aww man, your portla glitched. Try again.")
     exit()
 
 #user input - ask user to pick 3 colors from rainbow
@@ -53,7 +53,7 @@ if color1 not in palette or color2 not in palette or color3 not in palette:
     exit()
 
 #recursive function
-def recursive_spiral(current_step, max_steps, counter=1):
+def recursive_spiral(current_step, max_steps, counter=0):
     """
     draws a colorful star recursively based on users input for size and color
     current_step: which step of recursion were on

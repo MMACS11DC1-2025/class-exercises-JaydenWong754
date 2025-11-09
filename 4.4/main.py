@@ -1,18 +1,27 @@
 import turtle
 
 t = turtle.Turtle()
+
 t.speed('fastest')
 
-print("Make a star! How big is it?")
-max_steps = int(input())
+print("Make a portal to another dimension! How big is it?")
+
+max_steps = input()
+
+for x in max_steps:
+    if x not in "0123456789":
+        print("invalid input, enter a number")
+        exit()
+     
+max_steps = int(max_steps)
 
 if max_steps > 45:
-  print("woah your going to destroy the milky way, enter a smaller number")
-  exit()
-  
+    print("Woah, you're going to destroy the universe! Enter a smaller number.")
+    exit()
+
 if max_steps < 15:
-  print("aww man your star merged intop a black hole. Try again")
-  exit()
+    print("Aww man, your portla glitched. Try again.")
+    exit()
 
 print("Give a color from the rainbow")
 color1 = input().strip().lower()
@@ -31,23 +40,22 @@ palette = {
 }
 
 if color1 not in palette or color2 not in palette or color3 not in palette:
-  print("sorry, at least one of your colors is invalid")
-  exit()
+    print("Sorry, at least one of your colors is invalid.")
+    exit()
 
-def recursive_spiral(current_step, max_steps, counter=1):
+def recursive_spiral(current_step, max_steps, counter=0):
     if current_step >= max_steps:
-        return counter
-
+        return counter  
     base_length = 30
     length = base_length + (current_step * 10)
 
-    t.color(color1)
+    t.color(palette[color1])
     t.forward(length)
     t.right(190)
-    t.color(color2)
+    t.color(palette[color2])
     t.forward(length)
     t.right(190)
-    t.color(color3)
+    t.color(palette[color3])
     t.forward(length)
     t.right(190)
 
@@ -58,4 +66,5 @@ t.goto(-10, -10)
 t.pendown()
 
 total = recursive_spiral(0, max_steps)
-print("Total recursion calls:" + str(total))
+
+print("Total recursion calls: " + str(total))
