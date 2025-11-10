@@ -55,6 +55,7 @@ Give one last color:
 Sorry, at least one of your colors is invalid.
 
 3. user enters all valid data - example_3.png - it wont let me add photos 
+expected to flawlessly perform the function with the users input; size and 3 different colors, in this case, size 250, red, green, and blue
 Make a portal to another dimension! How big is it?
  250
 Give a color from the rainbow
@@ -66,6 +67,8 @@ Give one last color:
 Total recursion calls: 250
  
 4. user enters all valid data - example_4.png it wont let me add photos
+expected to flawlessly perform the function with the users input; size and 3 different colors, in this case, size 50, orange, purple, and yellow
+
 Make a portal to another dimension! How big is it?
  50
 Give a color from the rainbow
