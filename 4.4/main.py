@@ -4,20 +4,22 @@ import turtle
 #create turtle module
 t = turtle.Turtle()
 
+a = True
+
 #set speed
 t.speed('fastest')
 
 #user input for size
-print("Make a portal to another dimension! How big is it?")
-
+print("Make a portal to another dimension! How big is it? 50 to 500")
+  
 max_steps = input()
-
+  
 #checks character by character to make sure the user input all numbers
 for x in max_steps:
     if x not in "0123456789":
         print("invalid input, enter a number")
         exit()
-     
+        
 max_steps = int(max_steps) #TEST ERROR : I forgot to turn the input into an integer
 
 #input validation if too big or small
@@ -26,31 +28,34 @@ if max_steps > 501:
     exit() #TEST ERROR : I originally had break(), which didnt work as it can only be used in for and while loops
 
 if max_steps < 49:
-    print("Aww man, your portal glitched. Try again.")
+    print("Aww man, your portal glitched.")
     exit()
 
-#user input - ask user to pick 3 colors from rainbow
-print("Give a color from the rainbow")
-color1 = input().strip().lower() #minimize errors
-print("Give another color:")
-color2 = input().strip().lower()
-print("Give one last color:")
-color3 = input().strip().lower()
-
-#color dictionary to set hex codes for each color of the rainbow
-palette = {
-    "red": "#FF073A",
-    "orange": "#FFA500",
-    "yellow": "#FFFF33",
-    "green": "#39FF14",
-    "blue": "#1F51FF",
-    "purple": "#BF00FF",
-}
-
-#check if the users input matches a color in the dictionary
-if color1 not in palette or color2 not in palette or color3 not in palette:
-    print("Sorry, at least one of your colors is invalid.")
-    exit()
+while a == True: #while inputs to repeat the code until user inputs valid data
+  #user input - ask user to pick 3 colors from rainbow
+  print("Give a color from the rainbow")
+  color1 = input().strip().lower() #minimize errors
+  print("Give another color:")
+  color2 = input().strip().lower()
+  print("Give one last color:")
+  color3 = input().strip().lower()
+  
+  #color dictionary to set hex codes for each color of the rainbow
+  palette = {
+      "red": "#FF073A",
+      "orange": "#FFA500",
+      "yellow": "#FFFF33",
+      "green": "#39FF14",
+      "blue": "#1F51FF",
+      "purple": "#BF00FF",
+  }
+  
+  #check if the users input matches a color in the dictionary
+  if color1 not in palette or color2 not in palette or color3 not in palette:
+      print("Sorry, at least one of your colors is invalid.")
+  
+  else:
+    a = False
 
 #recursive function
 def recursive_spiral(current_step, max_steps, total_calls):
