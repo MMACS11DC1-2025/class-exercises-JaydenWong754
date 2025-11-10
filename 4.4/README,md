@@ -9,7 +9,7 @@ For sizing, i chose 50-500 because past 500 the spiral would start to go out of 
 For the recursive function itself, it uses 3 things, current_step to track current iteration, max_steps which is the base case, and total_calls to count the amount of recursive is called based on the max_steps. Because i accidebtally set the counter to 1 instead of 0 at the beginning, it always printed one extra, so I fixed it to counter = 0
 it then says that if the current step reaches max_steps, the base case, it returns total_calls to see how much it looped
 I also created a second base case checking the physical size of it with length, so the program wil stop if the drawing goes too big, stopping the recursion
-I set a base length, which is 30 , and made length base length and current step by 10 to make the lines longer each time. I just played around with random numbers but settled on these settings
+I set a base length, which is 30 , and made length base length and current step by 5 to make the lines longer each time. I just played around with random numbers but settled on these settings
 
 next part is my actual function, which draw forward by length pixels using a color. and turn right by 190 degrees.
 This part was the easiest for me. It draws a 3 sided pattern each time.  
@@ -20,7 +20,8 @@ total_calls by 1 to keep track of the total number of calls.
 
 I also preset the turtle to a position before running.
 
-after running, it outputs the number of recursive calls made.
+after running, i purposly made the turtle not go back to the center as i wanted the user to see the start of the spiral.
+it also outputs the number of recursive calls made.
 
 overall, my biggest hardships were at the beginning while I was trying to make a carpet design, and for some reason drawing two portals instead of one when I did the counting another way. 
 
@@ -53,7 +54,7 @@ Give one last color:
  bright sunshinie yellow
 Sorry, at least one of your colors is invalid.
 
-3. user enters all valid data - example3.png 
+3. user enters all valid data - example_3.png - it wont let me add photos 
 Make a portal to another dimension! How big is it?
  250
 Give a color from the rainbow
@@ -63,8 +64,8 @@ Give another color:
 Give one last color:
  blue
 Total recursion calls: 250
-
-4. user enters all valid data - example4.png
+ 
+4. user enters all valid data - example_4.png it wont let me add photos
 Make a portal to another dimension! How big is it?
  50
 Give a color from the rainbow

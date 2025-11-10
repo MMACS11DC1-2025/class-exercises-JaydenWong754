@@ -26,7 +26,7 @@ if max_steps > 501:
     exit() #TEST ERROR : I originally had break(), which didnt work as it can only be used in for and while loops
 
 if max_steps < 49:
-    print("Aww man, your portla glitched. Try again.")
+    print("Aww man, your portal glitched. Try again.")
     exit()
 
 #user input - ask user to pick 3 colors from rainbow
@@ -57,9 +57,9 @@ def recursive_spiral(current_step, max_steps, total_calls):
     """
     draws a colorful star recursively based on users input for size and color
     VARIABLE EXPLANATION
-    current_step: which step of recursion were on
+    current_step: which step of recursion program is on
     max_steps: total number of steps requested by user
-    counter: keeps track of recursion calls
+    total_calls: counts number of segments
     """
     
     #base case -stops recursion when reached the maximum amount of steps
@@ -68,7 +68,7 @@ def recursive_spiral(current_step, max_steps, total_calls):
 
     #increases line for each step
     base_length = 30
-    length = base_length + (current_step * 10)
+    length = base_length + (current_step * 5)
 
     if length > 5500: #second base case
         return total_calls
@@ -91,3 +91,12 @@ def recursive_spiral(current_step, max_steps, total_calls):
 t.penup()           #lift to move to position
 t.goto(-10, -10)    #go to position
 t.pendown()         #pen down to prepare to draw
+
+#run it
+total = recursive_spiral(0, max_steps, 0)
+
+t.penup()
+t.goto(0, 0)
+
+#output
+print("Total recursion calls: " + str(total))  #count how many times recursion happend is this good
