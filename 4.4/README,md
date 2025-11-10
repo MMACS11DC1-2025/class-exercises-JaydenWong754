@@ -48,6 +48,8 @@ Woah, you're going to destroy the universe! Enter a smaller number.
 -expected to force user to input valid data from a while loop
 
 Make a portal to another dimension! How big is it? 50 to 500
+-expected to trap user in while loop untill all three colors are valid input
+
  70
 Give a color from the rainbow
  hsiwh
