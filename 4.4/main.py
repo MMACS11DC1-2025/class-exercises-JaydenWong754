@@ -56,7 +56,7 @@ while a == True: #while inputs to repeat the code until user inputs valid data
   
   else:
     a = False
-
+    break
 #recursive function
 def recursive_spiral(current_step, max_steps, total_calls):
     """
@@ -104,4 +104,4 @@ t.penup()
 t.goto(0, 0)
 
 #output
-print("Total recursion calls: " + str(total))  #count how many times recursion happend is this good
+print("Total recursion calls: " + str(total))  #count how many times recursio                                                                                                                                                                                                                                                     print("Total recursion calls: "
