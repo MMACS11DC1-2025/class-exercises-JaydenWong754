@@ -1,4 +1,4 @@
-def color(r, g, b):
+def isgreen(r, g, b):
     if r >= 230 and r <= 255 and g >= 0 and g <= 25 and b >= 0 and b <= 25:
         return "red"
 
@@ -8,4 +8,4 @@ def color(r, g, b):
     if r >= 0 and r <= 25 and g >= 0 and g <= 25 and b >= 230 and b <= 255:
         return "blue"
 
-print((color(5, 235, 2)))
+print((isgreen(5, 235, 2)))
