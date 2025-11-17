@@ -1,9 +1,9 @@
 from PIL import Image
 import xx
-image_green = Image.open("5.1/R.jpg").load()
+image_green = Image.open("5.1/kid-green.jpg").load()
 image_beach = Image.open("5.1/beach.jpg").load()
 
-image_output = Image.open("5.1/R.jpg")
+image_output = Image.open("5.1/kid-green.jpg")
 
 w = image_output.width
 h = image_output.height
