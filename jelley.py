@@ -13,9 +13,11 @@ def binarize(input_filename, output_prefix):
         for j in range(h):
             if jellybean.colour((r,g,b)):
                 outputimage
-                image_output.putpixel(xy, beach_colour)
+                outputimage.putpixel(xy, "black")
             else:
                 beach_color = (0,0,0)
                 xy = (i, j)
-                image_output.putpixel(xy, beach_color)
-    image_output.save("black.png", "png")
+                outputimage.putpixel(xy, beach_color)
+    outputimage.save("black.png", "png")
+
+binarize("jellybean.png", "jelleyboy")
