@@ -1,5 +1,6 @@
 import time
 
+images = ["6.7/1.png", "6.7/2.png", "6.7/3.png", "6.7/4.png", "6.7/5.png", "6.7/6.png", "6.7/7.png", "6.7/8.png", "6.7/9.png", "6.7/10.png"]
 
 t0 = time.time()
 
@@ -15,59 +16,60 @@ def colour(r, g, b):
     if 50 <= r < 200 and 50 <= g < 200 and 50 <= b < 200:
         return "gray"
 
-file = Image.open("6.7/6.png")
-jbImage = file.load()
+for a in images:
+    file = Image.open(a)
+    jbImage = file.load()
 
-t1 = time.time()
+    t1 = time.time()
 
-blackPixels = []
-whitePixels = []
-grayPixels = []
+    blackPixels = []
+    whitePixels = []
+    grayPixels = []
 
-width = file.width
-height = file.height
+    width = file.width
+    height = file.height
 
-for x in range(width):
-    for y in range(height):
-        pixel_r = jbImage[x, y][0]
-        pixel_g = jbImage[x, y][1]
-        pixel_b = jbImage[x, y][2]
+    for x in range(width):
+        for y in range(height):
+            pixel_r = jbImage[x, y][0]
+            pixel_g = jbImage[x, y][1]
+            pixel_b = jbImage[x, y][2]
 
-        if colour(pixel_r, pixel_g, pixel_b) == "black":
-            blackPixels.append(jbImage[x, y])
+            if colour(pixel_r, pixel_g, pixel_b) == "black":
+                blackPixels.append(jbImage[x, y])
 
-        elif colour(pixel_r, pixel_g, pixel_b) == "white":
-            whitePixels.append(jbImage[x, y])
+            elif colour(pixel_r, pixel_g, pixel_b) == "white":
+                whitePixels.append(jbImage[x, y])
 
-        if colour(pixel_r, pixel_g, pixel_b) == "grey":
-            grayPixels.append(jbImage[x, y])
+            if colour(pixel_r, pixel_g, pixel_b) == "grey":
+                grayPixels.append(jbImage[x, y])
 
 
-t2 = time.time()
+    t2 = time.time()
 
-numBlack = len(blackPixels)
-numGray = len(grayPixels)
-numWhite = len(whitePixels)
+    numBlack = len(blackPixels)
+    numGray = len(grayPixels)
+    numWhite = len(whitePixels)
 
-totalPixels = width*height
+    totalPixels = width*height
 
-blackRatio = numBlack / totalPixels
-whiteRatio = numWhite / totalPixels
-grayRatio = numGray / totalPixels
+    blackRatio = numBlack / totalPixels
+    whiteRatio = numWhite / totalPixels
+    grayRatio = numGray / totalPixels
 
-blackPercent = blackRatio * 100
-whitePercent = whiteRatio * 100
-grayPercent = grayRatio * 100
+    blackPercent = blackRatio * 100
+    whitePercent = whiteRatio * 100
+    grayPercent = grayRatio * 100
 
-t3 = time.time()
+    t3 = time.time()
 
-report = "{:.2f}% are white, {:.2f}% are gray, {:.2f}% are black".format(whitePercent, grayPercent, blackPercent)
-print(report)
+    report = "for image" + str(a) + " {:.2f}% are white, {:.2f}% are gray, {:.2f}% are black".format(whitePercent, grayPercent, blackPercent)
+    print(report)
 
-module_load = t1 - t0
-image_open_load = t2 - t1
-loop = t3-t2
-entire = t3 - t0
+    module_load = t1 - t0
+    image_open_load = t2 - t1
+    loop = t3-t2
+    entire = t3 - t0
 
-timings = "It took {:.2f}s to import the PIL, {:.2f}s to load the image, and {:.2f}s to do the loop. All in all it took {:.2f}s.".format(module_load, image_open_load, loop, entire)
-print(timings)
+    #timings = "It took {:.2f}s to import the PIL, {:.2f}s to load the image, and {:.2f}s to do the loop. All in all it took {:.2f}s.".format(module_load, image_open_load, loop, entire)
+    #print(timings)
