@@ -66,6 +66,12 @@ for a in images:
     report = "for image" + str(a) + " {:.2f}% are white, {:.2f}% are gray, {:.2f}% are black".format(whitePercent, grayPercent, blackPercent)
     print(report)
 
+    if blackPercent + whitePercent + grayPercent < 60:
+        print("color")
+
+    else:
+        print("bnw")
+
     module_load = t1 - t0
     image_open_load = t2 - t1
     loop = t3-t2
