@@ -7,14 +7,15 @@ t0 = time.time()
 from PIL import Image
 
 def colour(r, g, b):
-    if 0 <= r < 50 and 0 <= g < 50 and 0 <= b < 50:
-        return "black"
-
-    if 200 <= r <= 255 and 200 <= g <= 255 and 200 <= b <= 255:
+    if 0 <= r < 50 and 200 <= g < 255 and 0 <= b < 50:
         return "white"
+
+    elif 200 <= r <= 255 and 200 <= g <= 255 and 0 <= b <= 50:
+        return "black"
     
-    if 50 <= r < 200 and 50 <= g < 200 and 50 <= b < 200:
-        return "gray"
+    else:
+        return "unknown"
+    
 
 for a in images:
     file = Image.open(a)
@@ -24,7 +25,6 @@ for a in images:
 
     blackPixels = []
     whitePixels = []
-    grayPixels = []
 
     width = file.width
     height = file.height
@@ -35,42 +35,36 @@ for a in images:
             pixel_g = jbImage[x, y][1]
             pixel_b = jbImage[x, y][2]
 
-            if colour(pixel_r, pixel_g, pixel_b) == "black":
-                blackPixels.append(jbImage[x, y])
+            if colour(pixel_r, pixel_g, pixel_b) == "dead":
+                deadPixels.append(jbImage[x, y])
 
-            elif colour(pixel_r, pixel_g, pixel_b) == "white":
-                whitePixels.append(jbImage[x, y])
-
-            if colour(pixel_r, pixel_g, pixel_b) == "grey":
-                grayPixels.append(jbImage[x, y])
+            elif colour(pixel_r, pixel_g, pixel_b) == "alive":
+                alivePixels.append(jbImage[x, y])
 
 
     t2 = time.time()
 
-    numBlack = len(blackPixels)
-    numGray = len(grayPixels)
-    numWhite = len(whitePixels)
+    numDead = len(deadPixels)
+    numAlive = len(alivePixels)
 
     totalPixels = width*height
 
-    blackRatio = numBlack / totalPixels
-    whiteRatio = numWhite / totalPixels
-    grayRatio = numGray / totalPixels
+    deadRatio = numDead / totalPixels
+    aliveRatio = numAlive / totalPixels
 
-    blackPercent = blackRatio * 100
-    whitePercent = whiteRatio * 100
-    grayPercent = grayRatio * 100
+    deadPercent = deadRatio * 100
+    alivePercent = aliveRatio * 100
 
     t3 = time.time()
 
-    report = "for image" + str(a) + " {:.2f}% are white, {:.2f}% are gray, {:.2f}% are black".format(whitePercent, grayPercent, blackPercent)
+    report = "for image" + str(a) + " {:.2f}% are alive, {:.2f}% are dead".format(alivePercent, deadPercent)
     print(report)
 
-    if blackPercent + whitePercent + grayPercent < 60:
-        print("color")
+    if deadPercent + alivePercent < 60:
+        print("alive")
 
     else:
-        print("bnw")
+        print("dead")
 
     module_load = t1 - t0
     image_open_load = t2 - t1
