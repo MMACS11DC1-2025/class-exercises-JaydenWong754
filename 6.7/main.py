@@ -7,12 +7,10 @@ t0 = time.time()
 from PIL import Image
 
 def colour(r, g, b):
-    if 0 <= r < 50 and 200 <= g < 255 and 0 <= b < 50:
-        return "white"
-
-    elif 200 <= r <= 255 and 200 <= g <= 255 and 0 <= b <= 50:
-        return "black"
-    
+    if 150 <= r <= 230 and 120 <= g <= 200 and 0 <= b <= 100:
+        return "dead"
+    elif 0 <= r <= 200 and 80 <= g <= 255 and 0 <= b <= 120:
+        return "alive"
     else:
         return "unknown"
     
@@ -23,8 +21,8 @@ for a in images:
 
     t1 = time.time()
 
-    blackPixels = []
-    whitePixels = []
+    deadPixels = []
+    alivePixels = []
 
     width = file.width
     height = file.height
@@ -60,16 +58,17 @@ for a in images:
     report = "for image" + str(a) + " {:.2f}% are alive, {:.2f}% are dead".format(alivePercent, deadPercent)
     print(report)
 
-    if deadPercent + alivePercent < 60:
-        print("alive")
+    if alivePercent > 50:
+        print("overall alive")
 
     else:
-        print("dead")
+        print("overall dead")
 
     module_load = t1 - t0
     image_open_load = t2 - t1
     loop = t3-t2
     entire = t3 - t0
 
-    #timings = "It took {:.2f}s to import the PIL, {:.2f}s to load the image, and {:.2f}s to do the loop. All in all it took {:.2f}s.".format(module_load, image_open_load, loop, entire)
-    #print(timings)
+    timings = "It took {:.3f}s to import the PIL, {:.3f}s to load the image, and {:.3f}s to do the loop. All in all it took {:.3f}s.".format(module_load, image_open_load, loop, entire)
+
+print(timings)
