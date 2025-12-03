@@ -14,11 +14,7 @@ Using the new skills in units 5 and 6, you will implement a computer vision algo
 
 > *These items belong at the very top of your `README.md`. They give the context for everything else you do.*
 
-<<<<<<< HEAD
 - [yes ] Choose a specific theme for which you will be scanning multiple images (3 pts)
-=======
-- [ ] Choose a specific theme for which you will be scanning multiple images (3 pts)
->>>>>>> upstream/6.2
 - [ ] Clearly define the visual feature your program will detect and count (2 pts)
 - [ ] Justify your feature detection with an explanation of how your chosen feature can be accurately identified (3 pts)
 
@@ -29,13 +25,8 @@ Using the new skills in units 5 and 6, you will implement a computer vision algo
 - [ ] Use nested loops to iterate over all pixels **in a set of at least 10 images** and calculate your "Feature Density Score" for each image (10 pts)
 - [ ] Append the filename and score to a master list, demonstrating list manipulation and the use of the append() method (5 pts)
 #### Task 3: Code Profiling
-<<<<<<< HEAD
 - [yes ] Measure the precise time taken for the program to complete the pixel processing loops using the time module (3 pts)
 - [yes ] Output this time in a human-readable report, using string formatting to ensure the output displays accurately to three decimal places (2 pts)
-=======
-- [ ] Measure the precise time taken for the program to complete the pixel processing loops using the time module (3 pts)
-- [ ] Output this time in a human-readable report, using string formatting to ensure the output displays accurately to three decimal places (2 pts)
->>>>>>> upstream/6.2
 
 ### Algorithms and Efficiency (Unit 6)
 #### Task 4: Selection Sort
