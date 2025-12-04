@@ -12,7 +12,7 @@ for line in file:
 	if artist == "Drake":
 		drake_data.append([danceability, songtitle, artist])
 
-for drake_data[0] in drake_data:
+for danceability in drake_data:
 	for i in range(len(drake_data)):
 		smallest_score = drake_data[i]
 		smallest_index = i
@@ -20,8 +20,10 @@ for drake_data[0] in drake_data:
 		for j in range(i + 1, len(drake_data)):
 			if drake_data[j] < smallest_score:
 		
-				drake_data[smallest_index], drake_data[i] = drake_data[i],
-				drake_data[smallest_index]
+				drake_data[smallest_index], drake_data[i] = drake_data[i], drake_data[smallest_index]
+
+				for x in range(5):
+					print(str(danceability[0]))
 
 
 

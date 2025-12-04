@@ -2,6 +2,8 @@ import time
 
 images = ["6.7/1.png", "6.7/2.png", "6.7/3.png", "6.7/4.png", "6.7/5.png", "6.7/6.png", "6.7/7.png", "6.7/8.png", "6.7/9.png", "6.7/10.png"]
 
+imageresults = []
+
 t0 = time.time()
 
 from PIL import Image
@@ -23,6 +25,7 @@ for a in images:
 
     deadPixels = []
     alivePixels = []
+    unknownPixels = []
 
     width = file.width
     height = file.height
@@ -39,26 +42,33 @@ for a in images:
             elif colour(pixel_r, pixel_g, pixel_b) == "alive":
                 alivePixels.append(jbImage[x, y])
 
+            else:
+                unknownPixels.append(jbImage[x, y])
 
     t2 = time.time()
 
     numDead = len(deadPixels)
     numAlive = len(alivePixels)
+    numUnknown = len(unknownPixels)
 
     totalPixels = width*height
 
     deadRatio = numDead / totalPixels
     aliveRatio = numAlive / totalPixels
+    unknownRatio = numUnknown / totalPixels
 
     deadPercent = deadRatio * 100
     alivePercent = aliveRatio * 100
-
+    unknownPercent = unknownRatio * 100
     t3 = time.time()
 
-    report = "for image" + str(a) + " {:.2f}% are alive, {:.2f}% are dead".format(alivePercent, deadPercent)
+    imageresults.append(alivePercent)
+
+    
+    report = "for image" + str(a) + " {:.2f}% detected alive, {:.2f}% detected dead, {:.2f}% unknown, not detetcted.".format(alivePercent, deadPercent, unknownPercent)
     print(report)
 
-    if alivePercent > 50:
+    if alivePercent > 60:
         print("overall alive")
 
     else:
@@ -72,3 +82,15 @@ for a in images:
     timings = "It took {:.3f}s to import the PIL, {:.3f}s to load the image, and {:.3f}s to do the loop. All in all it took {:.3f}s.".format(module_load, image_open_load, loop, entire)
 
 print(timings)
+
+for i in range(len(imageresults)):
+    smallest_score = imageresults[i]
+    smallest_index = i
+    for j in range(i + 1, len(imageresults)):
+        if imageresults[j] < smallest_score:
+            smallest_score = imageresults[j]
+            smallest_index = j
+    
+    imageresults[smallest_index],imageresults[i] = imageresults[i],imageresults[smallest_index]
+
+print(imageresults)
