@@ -45,7 +45,6 @@ for a in images:
             else:
                 unknownPixels.append(jbImage[x, y])
 
-    t2 = time.time()
 
     numDead = len(deadPixels)
     numAlive = len(alivePixels)
@@ -60,9 +59,8 @@ for a in images:
     deadPercent = deadRatio * 100
     alivePercent = aliveRatio * 100
     unknownPercent = unknownRatio * 100
-    t3 = time.time()
 
-    imageresults.append(alivePercent)
+    imageresults.append((alivePercent, a))
 
     
     report = "for image" + str(a) + " {:.2f}% detected alive, {:.2f}% detected dead, {:.2f}% unknown, not detetcted.".format(alivePercent, deadPercent, unknownPercent)
@@ -74,23 +72,30 @@ for a in images:
     else:
         print("overall dead")
 
-    module_load = t1 - t0
-    image_open_load = t2 - t1
-    loop = t3-t2
-    entire = t3 - t0
-
-    timings = "It took {:.3f}s to import the PIL, {:.3f}s to load the image, and {:.3f}s to do the loop. All in all it took {:.3f}s.".format(module_load, image_open_load, loop, entire)
-
-print(timings)
-
 for i in range(len(imageresults)):
-    smallest_score = imageresults[i]
+    smallest_score = imageresults[i][0]
     smallest_index = i
     for j in range(i + 1, len(imageresults)):
         if imageresults[j] < smallest_score:
             smallest_score = imageresults[j]
             smallest_index = j
     
-    imageresults[smallest_index],imageresults[i] = imageresults[i],imageresults[smallest_index]
+    imageresults[smallest_index], imageresults[i] = imageresults[i],imageresults[smallest_index]
+
+
+
+t2 = time.time()
 
 print(imageresults)
+
+t3 = time.time()
+
+'''
+module_load = t1 - t0
+image_open_load = t2 - t1
+loop = t3-t2
+entire = t3 - t0
+'''
+#timings = "It took {:.3f}s to import the PIL, {:.3f}s to load the image, and {:.3f}s to do the loop. All in all it took {:.3f}s.".format(module_load, image_open_load, loop, entire)
+
+#print(timings)

@@ -8,22 +8,16 @@ for line in file:
 	artist = str(items[-1])
 	songtitle = str(items[-2])
 	danceability = float(items[1])
-	
+
+   
+
 	if artist == "Drake":
 		drake_data.append([danceability, songtitle, artist])
 
+ 
+
 print("Dance score \tSong")
+
 for item in drake_data:
-	for i in range(len(drake_data)):
-		smallest_score = drake_data[i]
-		smallest_index = i
-
-		for j in range(i + 1, len(drake_data)):
-			if drake_data[j] < smallest_score:
-		
-				drake_data[smallest_index], drake_data[i] = drake_data[i],
-				drake_data[smallest_index]
-
-
-				print(str(item[0]) + "\t\t" + item[1] + " by " + item[2])
+    print(str(item[0]) + "\t\t" + item[1] + " by " + item[2])
 
