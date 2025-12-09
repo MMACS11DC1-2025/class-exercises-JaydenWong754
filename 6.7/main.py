@@ -109,3 +109,5 @@ entire = t3 - t0
 timings = "It took {:.3f}s to import the PIL, {:.3f}s to load the image, and {:.3f}s to do the loop. All in all it took {:.3f}s.".format(module_load, image_open_load, loop, entire)
 
 print(timings)
+
+def search()
