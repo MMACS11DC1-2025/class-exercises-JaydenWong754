@@ -86,18 +86,18 @@ for a in images:
 t2 = time.time()
 
 for i in range(len(imageresults)):
-    smallest_score = imageresults[i][0]
-    smallest_index = i
+    largest_score = imageresults[i][0]
+    largest_index = i
+    
     for j in range(i + 1, len(imageresults)):
-        if imageresults[j][0] < smallest_score:
-            smallest_score = imageresults[j][0]
-            smallest_index = j
-   
-    imageresults[smallest_index], imageresults[i] = imageresults[i],imageresults[smallest_index]
+        if imageresults[j][0] > largest_score: 
+            largest_score = imageresults[j][0]
+            largest_index = j
+    
+    imageresults[largest_index], imageresults[i] = imageresults[i], imageresults[largest_index]
 
-for y in imageresults[:6]:
-    print(y[1])
-
+for y in imageresults[:5]:
+    print("File: " + str(y[1]) + ", Alive Score: " + "{:.2f}".format(y[0]) + "%") 
 
 t3 = time.time()
 
