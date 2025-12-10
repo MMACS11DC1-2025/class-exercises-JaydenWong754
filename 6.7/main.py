@@ -10,7 +10,8 @@ imageresults = []
 
 t1 = time.time()
 
-def colour(r, g, b):
+def is_target_feature(r, g, b):
+    # This function is used to classify the pixel's state
     if 150 <= r <= 230 and 120 <= g <= 200 and 0 <= b <= 100:
         return "dead"
     elif 0 <= r <= 200 and 80 <= g <= 255 and 0 <= b <= 120:
@@ -41,7 +42,7 @@ for a in images:
             pixel_g = jbImage[x, y][1]
             pixel_b = jbImage[x, y][2]
 
-            pixel_colour = colour(pixel_r, pixel_g, pixel_b)
+            pixel_colour = is_target_feature(pixel_r, pixel_g, pixel_b)
 
             if pixel_colour == "dead":
                 deadPixels.append((pixel_r, pixel_g, pixel_b))
@@ -96,6 +97,7 @@ for i in range(len(imageresults)):
     
     imageresults[largest_index], imageresults[i] = imageresults[i], imageresults[largest_index]
 
+
 for y in imageresults[:5]:
     print("File: " + str(y[1]) + ", Alive Score: " + "{:.2f}".format(y[0]) + "%") 
 
@@ -110,4 +112,22 @@ timings = "It took {:.3f}s to import the PIL, {:.3f}s to load the image, and {:.
 
 print(timings)
 
-def search()
+def search(list_of_lists, query):
+    search_start_index = 0
+    search_end_index = len(list_of_lists)-1
+
+    while search_start_index <= search_end_index:
+        midpoint = int((search_start_index + search_end_index) / 2)
+
+        if list_of_lists[midpoint][0] == query:
+            return list_of_lists[midpoint][1]
+
+        elif list_of_lists[midpoint][0] < query:
+            search_start_index = midpoint + 1
+
+        else:
+            search_end_index = midpoint - 1
+
+    return -1
+
+print(search(imageresults, 85.59))
