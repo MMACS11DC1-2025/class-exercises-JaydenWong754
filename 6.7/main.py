@@ -120,34 +120,45 @@ for a in images:
     else:
         print("overall dead")
 
+#record time after the main processing loop finish
 t2 = time.time()
 
+#sel sort algorithm to sort it by alivePercent from most alive to least alive
 for i in range(len(imageresults)):
     largest_score = imageresults[i][0]
     largest_index = i
     
+    #find largest index of unsorted side of list (from i+1 to end)
     for j in range(i + 1, len(imageresults)):
+        #comapare alive percent
         if imageresults[j][0] > largest_score: 
             largest_score = imageresults[j][0]
             largest_index = j
     
+    #swap the largest element found with the element at the current position 'i'
     imageresults[largest_index], imageresults[i] = imageresults[i], imageresults[largest_index]
 
-
+#TEST ERROR - Confused with ARRAYs, tried doing :4 (0, 1, 2, 3, 4)
+#print top 5 results
 for y in imageresults[:5]:
     print("File: " + str(y[1]) + ", Alive Score: " + "{:.2f}".format(y[0]) + "%") 
 
+#record time after sorting
 t3 = time.time()
 
+#calculate the times
 module_load = t1 - t0
 image_open_load = image_open_time_cumulative
 loop = loop_time_cumulative
 entire = t3 - t0
 
+#format + print time summary
 timings = "It took {:.3f}s to import the PIL, {:.3f}s to load the image, and {:.3f}s to do the loop. All in all it took {:.3f}s.".format(module_load, image_open_load, loop, entire)
 
 print(timings)
 
+#TEST ERROR - I had my elif and else swapped with defining the new midpoint
+#work in progress, commentys ;ater
 def search(list_of_lists, query):
     search_start_index = 0
     search_end_index = len(list_of_lists)-1
@@ -159,10 +170,10 @@ def search(list_of_lists, query):
             return list_of_lists[midpoint][1]
 
         elif list_of_lists[midpoint][0] < query:
-            search_start_index = midpoint + 1
+            search_start_index = midpoint - 1
 
         else:
-            search_end_index = midpoint - 1
+            search_end_index = midpoint + 1
 
     return -1
 
