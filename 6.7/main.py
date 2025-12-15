@@ -178,3 +178,5 @@ def search(list_of_lists, query):
     return -1
 
 print(search(imageresults, 39.3212500000))
+
+print(search(imageresults, 6.7/2))
