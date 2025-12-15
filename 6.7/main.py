@@ -155,6 +155,7 @@ entire = t3 - t0
 #format + print time summary
 timings = "It took {:.3f}s to import the PIL, {:.3f}s to load the image, and {:.3f}s to do the loop. All in all it took {:.3f}s.".format(module_load, image_open_load, loop, entire)
 
+
 print(timings)
 
 #TEST ERROR - I had my elif and else swapped with defining the new midpoint
