@@ -8,7 +8,7 @@ t0 = time.time()
 from PIL import Image
 
 #list of image file paths (10)
-images = ["6.7/1.png", "6.7/2.png", "6.7/3.png", "6.7/4.png", "6.7/5.png", "6.7/6.png", "6.7/7.png", "6.7/8.png", "6.7/9.png", "6.7/10.png"]
+images = ["6.7/1.png", "6.7/2.png", "6.7/3.png", "6.7/4.png", "6.7/5.png", "6.7/6.png", "6.7/7.png", "6.7/8.png", "6.7/9.png", "6.7/0.png"]
 
 #list to store tuples
 imageresults = []
@@ -138,6 +138,8 @@ for i in range(len(imageresults)):
     #swap the largest element found with the element at the current position 'i'
     imageresults[largest_index], imageresults[i] = imageresults[i], imageresults[largest_index]
 
+print(imageresults)
+
 #TEST ERROR - Confused with ARRAYs, tried doing :4 (0, 1, 2, 3, 4)
 #print top 5 results
 for y in imageresults[:5]:
@@ -159,25 +161,37 @@ timings = "It took {:.3f}s to import the PIL, {:.3f}s to load the image, and {:.
 print(timings)
 
 #TEST ERROR - I had my elif and else swapped with defining the new midpoint
-#work in progress, commentys ;ater
+#work in progress, commentys later
 def search(list_of_lists, query):
+    for i in range(len(list_of_lists)):
+        smallest_id = int(list_of_lists[i][1][4])
+        smallest_index = i
+        
+        for j in range(i + 1, len(list_of_lists)):
+            current_id_in_loop = int(list_of_lists[j][1][4])
+            
+            if current_id_in_loop < smallest_id: 
+                smallest_id = current_id_in_loop
+                smallest_index = j
+        
+        list_of_lists[smallest_index], list_of_lists[i] = list_of_lists[i], list_of_lists[smallest_index]
+
     search_start_index = 0
-    search_end_index = len(list_of_lists)-1
+    search_end_index = len(list_of_lists) - 1
 
     while search_start_index <= search_end_index:
-        midpoint = int((search_start_index + search_end_index) / 2)
+        midpoint = (search_start_index + search_end_index) // 2
+        
+        midpoint_id = int(list_of_lists[midpoint][1][4])
 
-        if list_of_lists[midpoint][0] == query:
-            return list_of_lists[midpoint][1]
+        if midpoint_id == query:
+            return list_of_lists[midpoint][0]
 
-        elif list_of_lists[midpoint][0] < query:
-            search_start_index = midpoint - 1
-
+        elif midpoint_id < query:
+            search_start_index = midpoint + 1 
         else:
-            search_end_index = midpoint + 1
+            search_end_index = midpoint - 1
 
     return -1
 
-print(search(imageresults, 39.3212500000))
-
-print(search(imageresults, 6.7/2))
+print(f"Alive Score for Image 2: {search(imageresults, 2)}%")
