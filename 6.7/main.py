@@ -160,7 +160,7 @@ timings = "It took {:.3f}s to import the PIL, {:.3f}s to load the image, and {:.
 
 print(timings)
 
-#TEST ERROR - I had my elif and else swapped with defining the new midpoint
+#TEST ERROR - sorted wrong, had to resort
 #work in progress, commentys later
 def search(list_of_lists, query):
     for i in range(len(list_of_lists)):
