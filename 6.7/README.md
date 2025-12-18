@@ -1,30 +1,7 @@
-
-- [ ] Testing and robustness: include a section in your README describing testing done to ensure each of the tasks works as intended (1 pt)
 - [ ] Performance analysis: include a section in your README describing your code profiling: give an example of the report and discuss what parts of the program take the longest
-- [ ] Challenges faced: include a section in your README describing at least one challenge faced and how you overcame it (2 pts)
-
-
-
-
-### Creativity and Originality
-- [ ] The chosen theme and visual feature are unique, interesting, and insightful (2 pts)
 - [ ] Feature detection uses a more advanced process, such as pre-processing the image, using multiple pixels, or using statistical approaches to detect features (4 points)
-- [ ] Captured feature involves a real-world use-case. References a real paper, report, or dataset supporting decisions for detecting feature (4 points)
-
-## **SUBMISSION REQUIREMENTS**
-
-### **Files to Include:**
-1. `main.py` - Your complete Python program
-1. `README.md` - Documentation file with all required content.
-1. Images - The set of at least 10 images that your program will analyze
-1. (Optional): - Other Python modules you write that you import for use in `main.py`
-
-### **Required Documentation Content Summary:**
-- Project overview, including your chosen image theme
-- Explanation of your visual feature and how it will be identified
 - Discussion of the testing and validation done to verify your program works as intended
 - Discussion of your code profiling
-- Discussion of challenges faced while working on this project
 
 Grass Health Meter - By Jayden Wong
 
@@ -37,4 +14,15 @@ With Human Voters alone, it is easy for unfairness and errors, for example, a ab
 
 My algorithm would also allow for users to search up lawns, finding local favorites or friends with Binary Search, searching for the file name to get it's alive score or place on the leaderboard.
 
-One of the biggest challenges I faced was RGB
+A challenges I faced was RGB detection, aa I could not get it to work for all images. I played around with values for all colors until it worked, but now, some images havce alot of "unknown pixels" but still with lots of accuracy.
+
+My biggest challenge was using Binary sort to find a specific image's alive percent. Previously, I had displayed the top 5 scores using selection sort, ordering it from greatest to least, disregarding the image number. Because I believed the list was already sorted, I was puzzled for multiple classes why it was not working, semantic errors displayig unpredictable results. I even tried using the math function from the PIL to see if my isssue was rounding.
+
+I overcame this by retracing my steps and asking peers to do a check on my code, finally realizing the selection sort was different on how I had ordered it, and I wanted to search by image, not percent. To fix it, I used selection sort inside my binary search function to re-sort the list, printing without errors.
+
+Throught the last 2 weeks when I first started my project, I tested, comment, and worked on my code almost daily whenevere I had the chance.
+
+To fix errors, my main strategy was looking at the DEBUG CONSOLE to fix little errors(missing brackets, colon variabkle definition) and PRINTING for the more challenging errors, finding the last good output before it went wrong, then trying to fix the code beyond that. I also like to ask peers, upperclassmen, and my Teacher for help and advice on my code. I make sure my code is organized so it is easy to read and self evaluate.
+
+My program works fully as intended, fullfilling all of the code's requirements. It processes the image, evaluate its alive score, prints the top 5 results, and allows the user to search an image for its alive percent.
+
