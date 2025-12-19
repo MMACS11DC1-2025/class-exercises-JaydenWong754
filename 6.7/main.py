@@ -171,11 +171,15 @@ ONLY works if the code is sorted right (hence the resorting by ID), so the midpo
 '''
 def search(list_of_lists, query):
     for i in range(len(list_of_lists)):
-        smallest_id = int(list_of_lists[i][1][4])
+        path_i = list_of_lists[i][1]
+        #NEW: gets the image (eg 6.7/x.png), splits it by the slash, then the . so it gets whatever between the / and .
+        smallest_id = int(path_i.split("/")[-1].split(".")[0])
         smallest_index = i
         
         for j in range(i + 1, len(list_of_lists)):
-            current_id_in_loop = int(list_of_lists[j][1][4])
+            path_j = list_of_lists[j][1]
+            #NEW: gets the image (eg 6.7/x.png), splits it by the slash, then the . so it gets whatever between the / and .
+            current_id_in_loop = int(path_j.split("/")[-1].split(".")[0])
                 
             if current_id_in_loop < smallest_id: 
                 smallest_id = current_id_in_loop
@@ -190,9 +194,10 @@ def search(list_of_lists, query):
     while search_start_index <= search_end_index:
         midpoint = (search_start_index + search_end_index) // 2
         
-        #from "6.7/x.png", it only grabs the 4th element, so the number. I reckognize this would not work in larger cases but my program
-        #is designed only to handle the top cases from new zelands lawn contest
-        midpoint_id = int(list_of_lists[midpoint][1][4])
+        #NEW: gets the image (eg 6.7/x.png), splits it by the slash, then the . so it gets whatever between the / and .
+        path = list_of_lists[midpoint][1] 
+        filename = path.split("/")[-1] 
+        midpoint_id = int(filename.split(".")[0])
 
         #return id if healthscore found
         if midpoint_id == query:
@@ -239,7 +244,7 @@ while a:
         print("Please type 'yes' or 'no'.")
 
 
-print("CODE PROFILING AND TIMING")
+print("CODE PROFILING AND TIMING REPORT")
 #calculate the times
 module_load = t1 - t0
 image_open_load = image_open_time_cumulative

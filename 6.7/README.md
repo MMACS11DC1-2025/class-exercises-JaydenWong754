@@ -87,3 +87,9 @@ Ok, goodbye!
 #shows how long the program took, without the user interface
 CODE PROFILING AND TIMING
 It took 0.044s to import the PIL, 0.189s to load the image, and 6.711s to do the loop. All in all it took 7.213s.
+
+Some more error handling I did was changing my 4th element single digit ID systym that was easy to error if the file path changed o the number was over a digit with splitting the file name between the / and .
+
+it gets the image (eg 6.7/x.png), splits it by the slash, then the . so it gets whatever between the / and .
+
+
