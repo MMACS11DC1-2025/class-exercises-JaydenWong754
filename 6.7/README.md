@@ -24,9 +24,20 @@ To fix errors, my main strategy was looking at the DEBUG CONSOLE to fix little e
 
 My program works fully as intended, fullfilling all of the code's requirements. It processes the image, evaluate its alive score, prints the top 5 results, and allows the user to search an image for its alive percent.
 
-something "advanced" I tried to incorporate was weighing green pixels over 210 to have a extra weight of 1.2 percent, rewarding lawns with brighter greener grass to shine. 
+something "advanced" I tried to incorporate was weighing green pixels over 210 to have a extra weight of 1.5 percent, rewarding lawns with brighter greener grass to shine.
+I added this later, so it was not previously mentioned. Lawns with brighter grass are likely more healthy, so I reward them more with a small boost
 
 CODE PERFORMANCE ANALYSIS
-- not done, as it wont let me run it on my laggy computer and its 2:30 am
--will get done asap
--computer keeps crashing
+I decided to run my program 5 times to determine my approx run time
+
+It took 0.040s to import the PIL, 0.141s to load the image, and 6.038s to do the loop. All in all it took 6.476s.
+It took 0.043s to import the PIL, 0.136s to load the image, and 5.724s to do the loop. All in all it took 6.143s.
+It took 0.049s to import the PIL, 0.148s to load the image, and 5.723s to do the loop. All in all it took 6.148s.
+It took 0.037s to import the PIL, 0.148s to load the image, and 5.553s to do the loop. All in all it took 5.965s.
+It took 0.036s to import the PIL, 0.146s to load the image, and 5.708s to do the loop. All in all it took 6.113s.
+
+My program consistantly takes 6 seconds, down, previously from the 11 seconds I had before.
+
+This is because putting selection sort inside binary search really messed and slowed the program. In addition, my code was full of bugs, so after optimizing, I reduced it down to 6 seconds. 
+
+The loop takes the most amount of time, as

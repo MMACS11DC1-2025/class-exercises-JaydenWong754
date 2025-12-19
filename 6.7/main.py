@@ -113,11 +113,11 @@ for a in images:
     #multiply by 100 to get the percent
     deadPercent = deadRatio * 100
     alivePercent = aliveRatio * 100
-    veryalivePercent = (veryaliveRatio * 100) * 1.2
+    veryalivePercent = veryaliveRatio * 100
     unknownPercent = unknownRatio * 100
 
     #advanced criteria - increase accuracy with how bright and green the grass is ; weigh it more 
-    totalalivePercent = alivePercent + veryalivePercent
+    totalalivePercent = alivePercent + (veryalivePercent) * 1.5
 
     #set the cap to 100 so it doesnt go over
     if totalalivePercent > 100:
@@ -128,7 +128,7 @@ for a in images:
     imageresults.append((totalalivePercent, a))
 
     #print the summary for detection
-    report = "for image" + str(a) + " {:.2f}% detected alive, {:.2f}% detected dead, {:.2f}% unknown, not detetcted.".format(totalalivePercent, deadPercent, unknownPercent)
+    report = "for image " + str(a) + " {:.2f}% detected alive, {:.2f}% detected dead, {:.2f}% unknown, not detetcted.".format(totalalivePercent, deadPercent, unknownPercent)
     print(report)
 
     #decides if the grass is alive or dead
@@ -180,7 +180,7 @@ for i in range(len(imageresults)):
 #TEST ERROR - sorted wrong, had to resort
 '''
 finds health score of the lawn
-ONLY works if the code is sorted right (hence the resorting by ID), so the ,midpoint wont be messed up
+ONLY works if the code is sorted right (hence the resorting by ID), so the midpoint wont be messed up
 '''
 def search(list_of_lists, query):
     #bounds
@@ -211,27 +211,31 @@ def search(list_of_lists, query):
     return -1
 
 #user interface to find scores
-print("Do you want to search an image to get its alive score?  (yes/no)")
-ans = input().strip().lower()
-
 a = True
 
-while a == True:
+while a:
+    ans = input("Do you want to search an image to get its alive score? (yes/no): ").strip().lower()
+
     if ans == "yes":
-        print("what number? (0-9)")
-        numba = int(input().strip())
-        result = search(imageresults, numba)
+        try:
+            numba = int(input("What number? (0-9): ").strip())
+            
+            #Assuming imageresults and search() are defined elsewhere
+            result = search(imageresults, numba)
 
-        #error handling
-        if result != -1:
-            print(f"Alive Score: {result:.2f}%")
-
-        #if not found
-        else:
-            print("sorry, not found")
-    else:
-        print("ok")
+            if result != -1:
+                print(f"Alive Score: {result:.2f}%")
+            else:
+                print("Sorry, not found.")
+                
+        except ValueError:
+            print("Invalid input! Please enter a whole number between 0 and 9.")
+            
+    elif ans == "no":
+        print("Ok, goodbye!")
         a = False
+    else:
+        print("Please type 'yes' or 'no'.")
 
 
 print("CODE PROFILING AND TIMING")
