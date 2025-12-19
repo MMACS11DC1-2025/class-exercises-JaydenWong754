@@ -123,8 +123,8 @@ for a in images:
     if totalalivePercent > 100:
         totalalivePercent = 100
 
-    #store resulkts
-    #test error - had to add "a" or second element to help with binary search
+    #store results
+    #test error - had to add "a" or second element to help with binary search to get the ID / image #
     imageresults.append((totalalivePercent, a))
 
     #print the summary for detection
@@ -164,25 +164,24 @@ for y in imageresults[:5]:
 #record time after sorting
 t3 = time.time()
 
-for i in range(len(imageresults)):
-    smallest_id = int(imageresults[i][1][4])
-    smallest_index = i
-        
-    for j in range(i + 1, len(imageresults)):
-        current_id_in_loop = int(imageresults[j][1][4])
-            
-        if current_id_in_loop < smallest_id: 
-            smallest_id = current_id_in_loop
-            smallest_index = j
-        
-    imageresults[smallest_index], imageresults[i] = imageresults[i], imageresults[smallest_index]
-
 #TEST ERROR - sorted wrong, had to resort
 '''
 finds health score of the lawn
 ONLY works if the code is sorted right (hence the resorting by ID), so the midpoint wont be messed up
 '''
 def search(list_of_lists, query):
+    for i in range(len(list_of_lists)):
+        smallest_id = int(list_of_lists[i][1][4])
+        smallest_index = i
+        
+        for j in range(i + 1, len(list_of_lists)):
+            current_id_in_loop = int(list_of_lists[j][1][4])
+                
+            if current_id_in_loop < smallest_id: 
+                smallest_id = current_id_in_loop
+                smallest_index = j
+        
+    list_of_lists[smallest_index], list_of_lists[i] = list_of_lists[i], list_of_lists[smallest_index]
     #bounds
     search_start_index = 0
     search_end_index = len(list_of_lists) - 1
@@ -192,7 +191,7 @@ def search(list_of_lists, query):
         midpoint = (search_start_index + search_end_index) // 2
         
         #from "6.7/x.png", it only grabs the 4th element, so the number. I reckognize this would not work in larger cases but my program
-        #is designed only to handle th top cases from new zelands lawn contest
+        #is designed only to handle the top cases from new zelands lawn contest
         midpoint_id = int(list_of_lists[midpoint][1][4])
 
         #return id if healthscore found
@@ -213,14 +212,15 @@ def search(list_of_lists, query):
 #user interface to find scores
 a = True
 
+#printsit until user says no
 while a:
     ans = input("Do you want to search an image to get its alive score? (yes/no): ").strip().lower()
 
     if ans == "yes":
+        #try the code to see if it works
         try:
             numba = int(input("What number? (0-9): ").strip())
             
-            #Assuming imageresults and search() are defined elsewhere
             result = search(imageresults, numba)
 
             if result != -1:
@@ -228,6 +228,7 @@ while a:
             else:
                 print("Sorry, not found.")
                 
+        #if theres error such as not an int
         except ValueError:
             print("Invalid input! Please enter a whole number between 0 and 9.")
             

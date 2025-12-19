@@ -37,10 +37,9 @@ Using the new skills in units 5 and 6, you will implement a computer vision algo
 
 ### Process
 - [ yes] Algorithm design in English: outline the logic using English comments (pseudocode) before each major Python code block (3 pts)
-- [ ] Code clarity: use descriptive variable names unless they are standard loop indices (e.g. x, y) (2 pts)
-- [ ] Use of functions: structure the program using functions to organize it and reduce code duplication (2 pts)
-- [ ] Testing and robustness: include a section in your README describing testing done to ensure each of the tasks works as intended (1 pt)
-- [ ] Performance analysis: include a section in your README describing your code profiling: give an example of the report and discuss what parts of the program take the longest
+- [ yes] Code clarity: use descriptive variable names unless they are standard loop indices (e.g. x, y) (2 pts)
+- [ yes] Use of functions: structure the program using functions to organize it and reduce code duplication (2 pts)
+- [ yes] Testing and robustness: include a section in your README describing testing done to ensure each of the tasks works as intended (1 pt)
 - [ yes] Challenges faced: include a section in your README describing at least one challenge faced and how you overcame it (2 pts)
 
 ### Version Control
