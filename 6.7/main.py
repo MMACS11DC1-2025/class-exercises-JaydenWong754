@@ -17,8 +17,9 @@ imageresults = []
 t1 = time.time()
 
 '''
-classifies a pixel as dead, alive, or unknown based on its rgb color
+classifies a pixel as dead, alive, veryalive or unknown based on its rgb color
 brighter greens are alive,
+very bright greens as veryalive
 yellows / browns are dead,
 any other pixel not ALIVE or DEAD will be classified as unknown
 '''
@@ -29,7 +30,10 @@ def is_target_feature(r, g, b):
         return "dead"
     #check if pixel is "alive", if it is will return alive
     elif 0 <= r <= 200 and 80 <= g <= 255 and 0 <= b <= 120:
-        return "alive"
+        if g > 210:
+            return "veryalive"
+        else:
+            return "alive"
     #check if pixel is "unknown", if it is will return unknown
     else:
         return "unknown"
@@ -48,9 +52,10 @@ for a in images:
     jbImage = file.load() #load the data
     t_after_image_open = time.time() 
 
-    #store each pixel based on how it was classified (dead alive or unknown)
+    #store each pixel based on how it was classified (dead alive veryalive or unknown)
     deadPixels = []
     alivePixels = []
+    veryalivePixels = []
     unknownPixels = []
 
     #width + height to know how big the image is to iterate through all the pixels
@@ -77,6 +82,9 @@ for a in images:
             elif pixel_colour == "alive":
                 alivePixels.append((pixel_r, pixel_g, pixel_b))
 
+            elif pixel_colour == "veryalive":
+                veryalivePixels.append((pixel_r, pixel_g, pixel_b))
+
             else:
                 unknownPixels.append((pixel_r, pixel_g, pixel_b))
 
@@ -90,6 +98,7 @@ for a in images:
     #count the pixels
     numDead = len(deadPixels)
     numAlive = len(alivePixels)
+    numveryAlive = len(veryalivePixels)
     numUnknown = len(unknownPixels)
 
     #find the area
@@ -98,23 +107,32 @@ for a in images:
     #find the ratio of alive to dead to unknown
     deadRatio = numDead / totalPixels
     aliveRatio = numAlive / totalPixels
+    veryaliveRatio = numveryAlive / totalPixels
     unknownRatio = numUnknown / totalPixels
 
     #multiply by 100 to get the percent
     deadPercent = deadRatio * 100
     alivePercent = aliveRatio * 100
+    veryalivePercent = (veryaliveRatio * 100) * 1.2
     unknownPercent = unknownRatio * 100
+
+    #advanced criteria - increase accuracy with how bright and green the grass is ; weigh it more 
+    totalalivePercent = alivePercent + veryalivePercent
+
+    #set the cap to 100 so it doesnt go over
+    if totalalivePercent > 100:
+        totalalivePercent = 100
 
     #store resulkts
     #test error - had to add "a" or second element to help with binary search
-    imageresults.append((alivePercent, a))
+    imageresults.append((totalalivePercent, a))
 
     #print the summary for detection
-    report = "for image" + str(a) + " {:.2f}% detected alive, {:.2f}% detected dead, {:.2f}% unknown, not detetcted.".format(alivePercent, deadPercent, unknownPercent)
+    report = "for image" + str(a) + " {:.2f}% detected alive, {:.2f}% detected dead, {:.2f}% unknown, not detetcted.".format(totalalivePercent, deadPercent, unknownPercent)
     print(report)
 
     #decides if the grass is alive or dead
-    if alivePercent > 60:
+    if totalalivePercent > 60:
         print("overall alive")
 
     else:
@@ -138,8 +156,6 @@ for i in range(len(imageresults)):
     #swap the largest element found with the element at the current position 'i'
     imageresults[largest_index], imageresults[i] = imageresults[i], imageresults[largest_index]
 
-print(imageresults)
-
 #TEST ERROR - Confused with ARRAYs, tried doing :4 (0, 1, 2, 3, 4)
 #print top 5 results
 for y in imageresults[:5]:
@@ -148,6 +164,77 @@ for y in imageresults[:5]:
 #record time after sorting
 t3 = time.time()
 
+for i in range(len(imageresults)):
+    smallest_id = int(imageresults[i][1][4])
+    smallest_index = i
+        
+    for j in range(i + 1, len(imageresults)):
+        current_id_in_loop = int(imageresults[j][1][4])
+            
+        if current_id_in_loop < smallest_id: 
+            smallest_id = current_id_in_loop
+            smallest_index = j
+        
+    imageresults[smallest_index], imageresults[i] = imageresults[i], imageresults[smallest_index]
+
+#TEST ERROR - sorted wrong, had to resort
+'''
+finds health score of the lawn
+ONLY works if the code is sorted right (hence the resorting by ID), so the ,midpoint wont be messed up
+'''
+def search(list_of_lists, query):
+    #bounds
+    search_start_index = 0
+    search_end_index = len(list_of_lists) - 1
+
+    #two slashes to make sure whole index
+    while search_start_index <= search_end_index:
+        midpoint = (search_start_index + search_end_index) // 2
+        
+        #from "6.7/x.png", it only grabs the 4th element, so the number. I reckognize this would not work in larger cases but my program
+        #is designed only to handle th top cases from new zelands lawn contest
+        midpoint_id = int(list_of_lists[midpoint][1][4])
+
+        #return id if healthscore found
+        if midpoint_id == query:
+            return list_of_lists[midpoint][0]
+
+        #if too small, look in right half
+        elif midpoint_id < query:
+            search_start_index = midpoint + 1 
+        
+        #if too big, look in left half
+        else:
+            search_end_index = midpoint - 1
+
+    #return -1 if not found
+    return -1
+
+#user interface to find scores
+print("Do you want to search an image to get its alive score?  (yes/no)")
+ans = input().strip().lower()
+
+a = True
+
+while a == True:
+    if ans == "yes":
+        print("what number? (0-9)")
+        numba = int(input().strip())
+        result = search(imageresults, numba)
+
+        #error handling
+        if result != -1:
+            print(f"Alive Score: {result:.2f}%")
+
+        #if not found
+        else:
+            print("sorry, not found")
+    else:
+        print("ok")
+        a = False
+
+
+print("CODE PROFILING AND TIMING")
 #calculate the times
 module_load = t1 - t0
 image_open_load = image_open_time_cumulative
@@ -157,41 +244,4 @@ entire = t3 - t0
 #format + print time summary
 timings = "It took {:.3f}s to import the PIL, {:.3f}s to load the image, and {:.3f}s to do the loop. All in all it took {:.3f}s.".format(module_load, image_open_load, loop, entire)
 
-
 print(timings)
-
-#TEST ERROR - sorted wrong, had to resort
-#work in progress, commentys later
-def search(list_of_lists, query):
-    for i in range(len(list_of_lists)):
-        smallest_id = int(list_of_lists[i][1][4])
-        smallest_index = i
-        
-        for j in range(i + 1, len(list_of_lists)):
-            current_id_in_loop = int(list_of_lists[j][1][4])
-            
-            if current_id_in_loop < smallest_id: 
-                smallest_id = current_id_in_loop
-                smallest_index = j
-        
-        list_of_lists[smallest_index], list_of_lists[i] = list_of_lists[i], list_of_lists[smallest_index]
-
-    search_start_index = 0
-    search_end_index = len(list_of_lists) - 1
-
-    while search_start_index <= search_end_index:
-        midpoint = (search_start_index + search_end_index) // 2
-        
-        midpoint_id = int(list_of_lists[midpoint][1][4])
-
-        if midpoint_id == query:
-            return list_of_lists[midpoint][0]
-
-        elif midpoint_id < query:
-            search_start_index = midpoint + 1 
-        else:
-            search_end_index = midpoint - 1
-
-    return -1
-
-print(f"Alive Score for Image 2: {search(imageresults, 2)}%")

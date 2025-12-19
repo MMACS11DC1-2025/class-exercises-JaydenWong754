@@ -1,6 +1,4 @@
 - [ ] Performance analysis: include a section in your README describing your code profiling: give an example of the report and discuss what parts of the program take the longest
-- [ ] Feature detection uses a more advanced process, such as pre-processing the image, using multiple pixels, or using statistical approaches to detect features (4 points)
-- Discussion of the testing and validation done to verify your program works as intended
 - Discussion of your code profiling
 
 Grass Health Meter - By Jayden Wong
@@ -26,3 +24,9 @@ To fix errors, my main strategy was looking at the DEBUG CONSOLE to fix little e
 
 My program works fully as intended, fullfilling all of the code's requirements. It processes the image, evaluate its alive score, prints the top 5 results, and allows the user to search an image for its alive percent.
 
+something "advanced" I tried to incorporate was weighing green pixels over 210 to have a extra weight of 1.2 percent, rewarding lawns with brighter greener grass to shine. 
+
+CODE PERFORMANCE ANALYSIS
+- not done, as it wont let me run it on my laggy computer and its 2:30 am
+-will get done asap
+-computer keeps crashing
